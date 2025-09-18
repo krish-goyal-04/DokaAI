@@ -23,4 +23,11 @@ cd ui-assignment
 
 npm install
 
+npm run dev
+
+npm build
+
+npm start
+```
+
 
