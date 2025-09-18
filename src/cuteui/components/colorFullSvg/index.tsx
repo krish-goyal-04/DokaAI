@@ -1,21 +1,17 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { cn } from "@/cuteui/lib/cn";
+'use client';
+import React, { useEffect, useState } from 'react';
+
+import { cn } from '@/cuteui/lib/cn';
 
 type ColoredSvgIconProps = {
   filePath: string;
   color: string;
   className?: string;
-  [key: string]: any;
+  [key: string]: string | undefined;
 };
 
-const ColorFullSvg: React.FC<ColoredSvgIconProps> = ({
-  filePath,
-  color,
-  className,
-  ...props
-}) => {
-  const [svgContent, setSvgContent] = useState<string>("");
+const ColorFullSvg: React.FC<ColoredSvgIconProps> = ({ filePath, color, className, ...props }) => {
+  const [svgContent, setSvgContent] = useState<string>('');
 
   useEffect(() => {
     const fetchSvg = async () => {
@@ -25,12 +21,12 @@ const ColorFullSvg: React.FC<ColoredSvgIconProps> = ({
           throw new Error(`Failed to fetch SVG: ${response.statusText}`);
         }
         let svgText = await response.text();
-        svgText = svgText.replace(/(width|height)="[^"]*"/g, "");
+        svgText = svgText.replace(/(width|height)="[^"]*"/g, '');
         svgText = svgText.replace(/stroke="[^"]*"/g, `stroke="${color}"`);
 
         setSvgContent(svgText);
       } catch (error) {
-        console.error("Error loading SVG:", error);
+        console.error('Error loading SVG:', error);
       }
     };
 
@@ -38,11 +34,7 @@ const ColorFullSvg: React.FC<ColoredSvgIconProps> = ({
   }, [filePath, color]);
 
   return (
-    <div
-      {...props}
-      className={cn(className)}
-      dangerouslySetInnerHTML={{ __html: svgContent }}
-    />
+    <div {...props} className={cn(className)} dangerouslySetInnerHTML={{ __html: svgContent }} />
   );
 };
 

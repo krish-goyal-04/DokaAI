@@ -1,6 +1,7 @@
-import React from 'react';
-import { cn } from '../../lib/cn';
 import Image from 'next/image';
+import React from 'react';
+
+import { cn } from '../../lib/cn';
 
 interface IconProps {
   svg: string;

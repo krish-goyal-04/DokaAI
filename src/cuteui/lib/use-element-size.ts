@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+
 import { useEventListener, useMorphicEffect } from './use-event-listener';
 
 type Size = {

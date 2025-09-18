@@ -1,15 +1,15 @@
-import React from "react";
-import { Grid, Typography } from "@mui/material";
-import Image from "next/image";
-import { Button } from "../button/button";
-import theme from "@/theme";
+import { Grid, Typography } from '@mui/material';
+import Image, { StaticImageData } from 'next/image';
+import React from 'react';
+
+import { Button } from '../button/button';
 
 interface IProps {
   handleOpenInviteModal: () => void;
   title?: string;
   description?: React.ReactNode;
   buttonText?: string;
-  image?: any;
+  image?: StaticImageData;
 }
 export const EmptyMemberScreen = ({
   handleOpenInviteModal,
@@ -26,14 +26,10 @@ export const EmptyMemberScreen = ({
             {image && <Image src={image} alt="no-member" />}
           </Grid>
           <Grid>
-            <Typography className="bodySemiBold text-text-primary">
-              {title}
-            </Typography>
+            <Typography className="bodySemiBold text-text-primary">{title}</Typography>
           </Grid>
           <Grid>
-            <Typography className="bodyRegular text-text-primary">
-              {description}
-            </Typography>
+            <Typography className="bodyRegular text-text-primary">{description}</Typography>
           </Grid>
           <Grid>
             <Button

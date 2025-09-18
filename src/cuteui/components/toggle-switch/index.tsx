@@ -1,6 +1,5 @@
+import { ToggleButton as Button, ToggleButtonGroup } from '@mui/material';
 import React, { useState } from 'react';
-import { ToggleButton as Button, ToggleButtonGroup, Typography } from '@mui/material';
-import theme from '@/theme';
 
 interface Button {
   value: string;
@@ -16,11 +15,14 @@ interface CustomToggleButtonGroupProps {
 export const ToggleButton: React.FC<CustomToggleButtonGroupProps> = ({
   buttons,
   defaultSelected,
-  onSelectedChange
+  onSelectedChange,
 }) => {
   const [selected, setSelected] = useState(defaultSelected || buttons[0].value);
 
-  const handleSelectionChange = (event: React.ChangeEvent<{}>, newSelection: string | null) => {
+  const handleSelectionChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newSelection: string | null
+  ) => {
     if (newSelection !== null) {
       setSelected(newSelection);
       if (onSelectedChange) {
@@ -46,8 +48,8 @@ export const ToggleButton: React.FC<CustomToggleButtonGroupProps> = ({
           height: '2rem',
         },
         '& .Mui-selected': {
-            backgroundColor: `var(--primary-main) !important`,
-            color: 'var(--text-hint) !important',
+          backgroundColor: `var(--primary-main) !important`,
+          color: 'var(--text-hint) !important',
         },
       }}
     >
@@ -56,14 +58,11 @@ export const ToggleButton: React.FC<CustomToggleButtonGroupProps> = ({
           key={button.value}
           value={button.value}
           aria-label={button.label}
-          sx={{textTransform: 'none'}}
+          sx={{ textTransform: 'none' }}
         >
-            <Typography variant='bodyMedium'>
-                {button.label}
-            </Typography>
+          <span className="text-sm font-medium">{button.label}</span>
         </Button>
       ))}
     </ToggleButtonGroup>
   );
 };
-

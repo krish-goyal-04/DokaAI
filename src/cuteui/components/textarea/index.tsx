@@ -1,13 +1,14 @@
-import React from "react";
-import { cn } from "@/cuteui/lib/cn";
-import { InputLabel, Typography } from "@mui/material";
+import { InputLabel, Typography } from '@mui/material';
+import React from 'react';
+
+import { cn } from '@/cuteui/lib/cn';
 
 interface TextAreaProps {
   labelName: string;
   placeholder?: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onKeyDown?: (e: any) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   error?: boolean;
   errorMessage?: string;
   required?: boolean;
@@ -20,25 +21,23 @@ interface TextAreaProps {
 
 export const TextArea = ({
   labelName,
-  placeholder = "",
+  placeholder = '',
   value,
   onChange,
-  onKeyDown = () => { },
+  onKeyDown = () => {},
   error = false,
-  errorMessage = "",
+  errorMessage = '',
   required = false,
-  className = "",
-  name = "",
-  labelClassName = "",
-  height = "120px",
+  className = '',
+  name = '',
+  labelClassName = '',
+  height = '120px',
   ...props
 }: TextAreaProps) => {
   return (
     <div>
       <InputLabel htmlFor={labelName} className="mb-3 self-start">
-        <Typography
-          className={cn("text-text-primary bodyRegular", labelClassName)}
-        >
+        <Typography className={cn('text-text-primary bodyRegular', labelClassName)}>
           {labelName}
           {required && <span className="text-red-500"> *</span>}
         </Typography>
@@ -52,7 +51,7 @@ export const TextArea = ({
         onKeyDown={onKeyDown}
         style={{ ...props, height }}
         className={cn(
-          `resize-none w-full rounded-md bodyMedium border-0 ring-1 ring-inset ring-text-secondary p-2 focus:ring-1 ${error ? "focus:ring-red-500" : "focus:ring-primary-main"} focus:ring-inset placeholder:text-text-secondary text-text-primary`,
+          `resize-none w-full rounded-md bodyMedium border-0 ring-1 ring-inset ring-text-secondary p-2 focus:ring-1 ${error ? 'focus:ring-red-500' : 'focus:ring-primary-main'} focus:ring-inset placeholder:text-text-secondary text-text-primary`,
           className
         )}
       ></textarea>

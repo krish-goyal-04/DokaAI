@@ -1,19 +1,20 @@
 'use client';
-import { Search } from '../searchbar';
 import React, { useState } from 'react';
+
+import { Search } from '../searchbar';
 
 export interface IFloatingListProps {
   searchResults?: string[]; // Accepts an array of search results
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // Function to handle input changes
   placeholderText?: string; // Optional placeholder text
-  resultLabel?: any; // We don't know what this is yet
+  resultLabel?: React.ReactNode; // Optional label component to display with results
 }
 
 const SwiftFloatingList = ({
   searchResults,
   onChange,
   placeholderText = 'Search',
-  resultLabel
+  resultLabel,
 }: IFloatingListProps) => {
   const [value, setValue] = useState(''); // Local state for input value
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

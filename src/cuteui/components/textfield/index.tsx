@@ -1,6 +1,7 @@
-import React from "react";
-import { Typography, InputLabel } from "@mui/material";
-import { cn } from "@/cuteui/lib/cn";
+import { Typography, InputLabel } from '@mui/material';
+import React from 'react';
+
+import { cn } from '@/cuteui/lib/cn';
 
 interface CustomTextFieldProps {
   id?: string;
@@ -8,7 +9,7 @@ interface CustomTextFieldProps {
   placeholder?: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: any) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   error?: boolean;
   errorMessage?: string;
   required?: boolean;
@@ -24,16 +25,16 @@ interface CustomTextFieldProps {
 export const TextField: React.FC<CustomTextFieldProps> = ({
   id,
   labelName,
-  placeholder = "",
+  placeholder = '',
   value,
   onChange,
-  onKeyDown = () => { },
+  onKeyDown = () => {},
   error = false,
-  errorMessage = "",
+  errorMessage = '',
   required = false,
-  className = "",
-  labelClassName = "",
-  type = "text",
+  className = '',
+  labelClassName = '',
+  type = 'text',
   disabled = false,
   name,
   ...props
@@ -41,9 +42,7 @@ export const TextField: React.FC<CustomTextFieldProps> = ({
   return (
     <div className="w-full">
       <InputLabel htmlFor={id} className="mb-3 self-start">
-        <Typography
-          className={cn("text-text-primary bodyRegular", labelClassName)}
-        >
+        <Typography className={cn('text-text-primary bodyRegular', labelClassName)}>
           {labelName}
           {required && <span className="text-red-500"> *</span>}
         </Typography>
@@ -59,8 +58,9 @@ export const TextField: React.FC<CustomTextFieldProps> = ({
         style={{ ...props }}
         disabled={disabled}
         className={cn(
-          `border-0 bodyMedium rounded-md bg-text-hint p-2 w-full text-text-primary ring-1 ring-inset ring-text-secondary placeholder:text-text-secondary focus:ring-1 focus:ring-inset ${error ? "focus:ring-red-500" : "focus:ring-primary-main"
-          } ${disabled ? "opacity-50 cursor-not-allowed bg-background-disabled" : ""}`,
+          `border-0 bodyMedium rounded-md bg-text-hint p-2 w-full text-text-primary ring-1 ring-inset ring-text-secondary placeholder:text-text-secondary focus:ring-1 focus:ring-inset ${
+            error ? 'focus:ring-red-500' : 'focus:ring-primary-main'
+          } ${disabled ? 'opacity-50 cursor-not-allowed bg-background-disabled' : ''}`,
           className
         )}
       />

@@ -1,4 +1,4 @@
-import { MouseEvent, FocusEvent, MutableRefObject, useState } from "react";
+import { MouseEvent, FocusEvent, MutableRefObject, useState } from 'react';
 
 export const getElementOffset = (el?: HTMLElement | null | undefined) => {
   if (!el)
@@ -69,19 +69,28 @@ export const getEventRect = (
   return getRectFromDOMWithContainer(rect, getContainer);
 };
 
-const isRefTarget = (
-  eventOrRef:
-    | MouseEvent<HTMLElement>
-    | FocusEvent<HTMLElement>
-    | MutableRefObject<HTMLElement | null>
-): eventOrRef is MutableRefObject<HTMLElement | null> => {
-  return typeof (eventOrRef as any)?.target === "undefined";
-};
-export const useRect = (
-  initialState?: ReactiveDomReact | (() => ReactiveDomReact)
-) => {
+function isRefTarget(value: unknown): value is MutableRefObject<HTMLElement | null> {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    'current' in value &&
+    (value as MutableRefObject<HTMLElement | null>).current instanceof HTMLElement
+  );
+}
+
+function isMouseOrFocusEvent(
+  value: unknown
+): value is MouseEvent<HTMLElement> | FocusEvent<HTMLElement> {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    'target' in value &&
+    (value as MouseEvent<HTMLElement>).target instanceof HTMLElement
+  );
+}
+export const useRect = (initialState?: ReactiveDomReact | (() => ReactiveDomReact)) => {
   const [rect, setRect] = useState<ReactiveDomReact>(
-    initialState || defaultRect
+    typeof initialState === 'function' ? initialState() : initialState || defaultRect
   );
 
   const updateRect = (
@@ -91,9 +100,15 @@ export const useRect = (
       | MutableRefObject<HTMLElement | null>,
     getContainer?: () => HTMLElement | null
   ) => {
-    if (isRefTarget(eventOrRef))
-      return setRect(getRefRect(eventOrRef, getContainer));
-    setRect(getEventRect(eventOrRef, getContainer));
+    try {
+      if (isRefTarget(eventOrRef)) {
+        setRect(getRefRect(eventOrRef, getContainer));
+      } else if (isMouseOrFocusEvent(eventOrRef)) {
+        setRect(getEventRect(eventOrRef, getContainer));
+      }
+    } catch (error) {
+      console.error('Error updating rect:', error);
+    }
   };
 
   return {

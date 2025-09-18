@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { Switch as SwitchComponent, SwitchProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import {Switch as SwitchComponent, SwitchProps} from '@mui/material';
+import * as React from 'react';
 
 export const Switch = styled((props: SwitchProps) => (
   <SwitchComponent focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -23,7 +23,7 @@ export const Switch = styled((props: SwitchProps) => (
       '&.Mui-disabled + .MuiSwitch-track': {
         opacity: 0.5,
       },
-    }
+    },
   },
   '& .MuiSwitch-thumb': {
     boxSizing: 'border-box',

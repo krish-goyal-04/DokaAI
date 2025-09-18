@@ -1,7 +1,7 @@
 // components/Tab.tsx
-import * as React from 'react';
-import { Badge, colors, Grid, Tab as MuiTab, Tabs } from '@mui/material';
+import { Badge, Grid, Tab as MuiTab, Tabs } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
+import * as React from 'react';
 import { cn } from '@/cuteui/lib/cn';
 
 // Your default icons
@@ -13,8 +13,8 @@ type TabIcon = React.ReactElement | StaticImageData | string;
 export interface TabItem {
   label: string;
   subLabel?: string;
-  icon?: TabIcon;          // optional: React SVG element or image src
-  selectedIcon?: TabIcon;  // optional: image src to use when selected
+  icon?: TabIcon; // optional: React SVG element or image src
+  selectedIcon?: TabIcon; // optional: image src to use when selected
   count?: number;
 }
 
@@ -22,15 +22,11 @@ interface TabProps {
   value: number;
   onChange: (event: React.SyntheticEvent, newValue: number) => void;
   tabItems: TabItem[];
-  useIcon?: boolean;       // if true, use CommonIcon/SelectedCommonIcon
+  useIcon?: boolean; // if true, use CommonIcon/SelectedCommonIcon
   classname?: string;
 }
 
-function renderIcon(
-  tab: TabItem,
-  isActive: boolean,
-  useIcon?: boolean
-) {
+function renderIcon(tab: TabItem, isActive: boolean, useIcon?: boolean) {
   // Case 1: default icon pair
   if (useIcon) {
     return (
@@ -57,24 +53,10 @@ function renderIcon(
     | StaticImageData
     | string;
 
-  return (
-    <Image
-      src={imgSrc}
-      alt={tab.label}
-      width={16}
-      height={16}
-      style={{ marginRight: 20 }}
-    />
-  );
+  return <Image src={imgSrc} alt={tab.label} width={16} height={16} style={{ marginRight: 20 }} />;
 }
 
-export const Tab: React.FC<TabProps> = ({
-  value,
-  onChange,
-  tabItems,
-  useIcon,
-  classname,
-}) => {
+export const Tab: React.FC<TabProps> = ({ value, onChange, tabItems, useIcon, classname }) => {
   return (
     <Grid>
       <Tabs
@@ -118,10 +100,8 @@ export const Tab: React.FC<TabProps> = ({
                   <div className="flex flex-col leading-tight">
                     <span
                       className={cn(
-                        "truncate max-w-[300px] text-[14px] leading-4", // fixed size from your .bodyMedium
-                        isActive
-                          ? "bodyMedium text-primary-main"
-                          : "bodyRegular text-text-primary"
+                        'truncate max-w-[300px] text-[14px] leading-4', // fixed size from your .bodyMedium
+                        isActive ? 'bodyMedium text-primary-main' : 'bodyRegular text-text-primary'
                       )}
                       title={tab.label}
                     >
@@ -131,15 +111,14 @@ export const Tab: React.FC<TabProps> = ({
                     {tab.subLabel && (
                       <span
                         className={cn(
-                          "subtextRegular truncate max-w-[200px] leading-4",
-                          isActive ? "text-green-light" : "text-text-secondary"
+                          'subtextRegular truncate max-w-[200px] leading-4',
+                          isActive ? 'text-green-light' : 'text-text-secondary'
                         )}
                         title={tab.subLabel}
                       >
                         {tab.subLabel}
                       </span>
                     )}
-
                   </div>
 
                   <Badge
@@ -157,9 +136,7 @@ export const Tab: React.FC<TabProps> = ({
                         minWidth: '19px',
                         height: '18px',
                         border: `1px solid ${
-                          isActive
-                            ? 'var(--primary-main)'
-                            : 'var(--background-disabled)'
+                          isActive ? 'var(--primary-main)' : 'var(--background-disabled)'
                         }`,
                         borderRadius: '1.5rem',
                         textAlign: 'center',

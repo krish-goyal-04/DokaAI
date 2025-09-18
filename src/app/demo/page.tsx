@@ -1,10 +1,11 @@
 'use client';
-import React, { useState } from 'react';
-import { SelectChangeEvent } from '@mui/material';
-import { CustomSelect } from '@/cuteui/components/custom-select';
+import PeopleIcon from '@mui/icons-material/People';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
-import PeopleIcon from '@mui/icons-material/People';
+import { SelectChangeEvent } from '@mui/material';
+import React, { useState } from 'react';
+
+import { CustomSelect } from '@/cuteui/components/custom-select';
 
 function DropDown() {
   // --- helpers to normalize MUI SelectChangeEvent unions ---

@@ -1,9 +1,9 @@
-import React from 'react';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import React from 'react';
 
 interface RadioButtonProps {
   label: string;
@@ -38,7 +38,14 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
           <FormControlLabel
             key={option.value}
             value={option.value}
-            control={<Radio sx={{ color: 'var(--primary-main)', '&.Mui-checked': { color: 'var(--primary-main)' } }} />}
+            control={
+              <Radio
+                sx={{
+                  color: 'var(--primary-main)',
+                  '&.Mui-checked': { color: 'var(--primary-main)' },
+                }}
+              />
+            }
             label={option.label}
           />
         ))}

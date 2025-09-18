@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
-type InputFocusEvent = React.FocusEvent<any>;
-type InputMouseEvent = React.MouseEvent<any, MouseEvent>;
+type InputFocusEvent = React.FocusEvent<HTMLElement>;
+type InputMouseEvent = React.MouseEvent<HTMLElement>;
 
 type InteractiveEventTypes = {
   readOnly?: boolean;
@@ -27,7 +27,7 @@ export function useInteractiveEvent({
       setIsFocus((prevState) => !prevState);
       onFocus && onFocus(e); // eslint-disable-line no-unused-expressions
     },
-    [readOnly, onFocus],
+    [readOnly, onFocus]
   );
 
   const handleOnBlur = useCallback(
@@ -36,25 +36,25 @@ export function useInteractiveEvent({
       setIsFocus(() => false);
       onBlur && onBlur(e); // eslint-disable-line no-unused-expressions
     },
-    [readOnly, onBlur],
+    [readOnly, onBlur]
   );
 
   const handleOnMouseEnter = useCallback(
     (e: InputMouseEvent) => {
       if (readOnly === true) return false;
-      setIsHover(() => true);
-      onMouseEnter && onMouseEnter(e); // eslint-disable-line no-unused-expressions
+      setIsHover(true);
+      onMouseEnter?.(e);
     },
-    [readOnly],
+    [readOnly, onMouseEnter]
   );
 
   const handleOnMouseLeave = useCallback(
     (e: InputMouseEvent) => {
       if (readOnly === true) return false;
-      setIsHover(() => false);
-      onMouseLeave && onMouseLeave(e); // eslint-disable-line no-unused-expressions
+      setIsHover(false);
+      onMouseLeave?.(e);
     },
-    [readOnly],
+    [readOnly, onMouseLeave]
   );
 
   return {

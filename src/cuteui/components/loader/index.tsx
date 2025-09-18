@@ -1,5 +1,4 @@
-import { CircularProgress } from '@mui/material'
-import React from 'react'
+import React from 'react';
 
 const Loader = () => {
   return (
@@ -8,7 +7,7 @@ const Loader = () => {
         <div key={index} className="spinner-blade"></div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default Loader;

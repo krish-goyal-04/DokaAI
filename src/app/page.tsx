@@ -1,11 +1,11 @@
 'use client';
 
-import { Box, Button, Container, Typography, Stack, Paper, Grid, Chip } from '@mui/material';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import CodeIcon from '@mui/icons-material/Code';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import RouteIcon from '@mui/icons-material/Route';
+import { Box, Button, Container, Typography, Stack, Paper, Grid, Chip } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
   const router = useRouter();
@@ -58,16 +58,15 @@ export default function Home() {
             >
               Welcome to DokaAI
             </Typography>
-            <Typography
-              color="text.secondary"
-              sx={{ maxWidth: 820, lineHeight: 1.6 }}
-            >
-              Build and explore AI-driven supporting microservices—Notifications, Engagement, Rewards, Search, and Agents—
-              with production-grade patterns (multi-tenant, DDD, CQRS).
+            <Typography color="text.secondary" sx={{ maxWidth: 820, lineHeight: 1.6 }}>
+              Build and explore AI-driven supporting microservices—Notifications, Engagement,
+              Rewards, Search, and Agents— with production-grade patterns (multi-tenant, DDD, CQRS).
             </Typography>
 
             <p>You need to setup the action flow in the route provided below</p>
-            <p>Demo will give and example for you how to use the components and create one for you</p>
+            <p>
+              Demo will give and example for you how to use the components and create one for you
+            </p>
           </Stack>
         </Box>
 
@@ -85,8 +84,13 @@ export default function Home() {
             >
               <Stack spacing={2} alignItems="flex-start">
                 <CodeIcon sx={{ fontSize: 36, color: 'text-text-primary' }} />
-                <Typography variant="h5" className='text-text-primary' component="h2" sx={{ fontWeight: 700 }}>
-                  Component  Demo
+                <Typography
+                  variant="h5"
+                  className="text-text-primary"
+                  component="h2"
+                  sx={{ fontWeight: 700 }}
+                >
+                  Component Demo
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ minHeight: 64 }}>
                   You can see the demo code under demo folder which uses custom select cute ui
@@ -117,11 +121,17 @@ export default function Home() {
             >
               <Stack spacing={2} alignItems="flex-start">
                 <RouteIcon sx={{ fontSize: 36, color: 'primary.main' }} />
-                <Typography className='text-text-primary' variant="h5" component="h2" sx={{ fontWeight: 700 }}>
+                <Typography
+                  className="text-text-primary"
+                  variant="h5"
+                  component="h2"
+                  sx={{ fontWeight: 700 }}
+                >
                   Action Flow
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ minHeight: 64 }}>
-                  Walk through the end-to-end path: configure → trigger → process → send → observe → iterate.
+                  Walk through the end-to-end path: configure → trigger → process → send → observe →
+                  iterate.
                 </Typography>
                 <Button
                   variant="outlined"
@@ -135,7 +145,6 @@ export default function Home() {
               </Stack>
             </Paper>
           </Grid>
-
         </Grid>
 
         {/* Helper Row */}
@@ -148,7 +157,8 @@ export default function Home() {
         {/* Footer */}
         <Box sx={{ mt: 4, textAlign: 'center' }}>
           <Typography variant="body2" color="text.secondary">
-            Need help? Reach out to <b>Atul Joshi</b> — WhatsApp: <b>961120557</b> · Email: <b>atuljoshi@nthexam.com</b>
+            Need help? Reach out to <b>Atul Joshi</b> — WhatsApp: <b>961120557</b> · Email:{' '}
+            <b>atuljoshi@nthexam.com</b>
           </Typography>
         </Box>
       </Container>

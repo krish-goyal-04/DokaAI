@@ -1,15 +1,16 @@
-import React from 'react'
-import {Checkbox as CheckboxComponent} from '@mui/material';
+import { Checkbox as CheckboxComponent } from '@mui/material';
+import React from 'react';
+
 import { cn } from '@/cuteui/lib/cn';
 
 interface IcheckboxProps {
-  checked : any;
-  onChange? : any;
+  checked: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
   name?: string;
-  className?:string;
+  className?: string;
 }
 
-export const CuteCheckbox = ({checked=false, onChange,name,className}:IcheckboxProps) => {
+export const CuteCheckbox = ({ checked = false, onChange, name, className }: IcheckboxProps) => {
   return (
     <CheckboxComponent
       checked={checked}
@@ -20,10 +21,9 @@ export const CuteCheckbox = ({checked=false, onChange,name,className}:IcheckboxP
         color: 'var(--text-primary)',
         '&.Mui-checked': {
           color: 'var(--primary-main)',
-        }
+        },
       }}
       className={cn(className)}
     />
-  )
-}
-
+  );
+};

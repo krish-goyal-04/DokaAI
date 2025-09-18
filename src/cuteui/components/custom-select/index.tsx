@@ -1,4 +1,3 @@
-import React, { useMemo, useState } from 'react';
 import {
   Select,
   MenuItem,
@@ -8,13 +7,23 @@ import {
   Box,
   SelectChangeEvent,
 } from '@mui/material';
-import theme from '@/theme';
+import React, { useMemo, useState } from 'react';
+
 import { truncateName } from '@/cuteui/lib/truncate-name';
+import theme from '@/theme';
+
 import { CuteCheckbox } from '../checkbox';
 
 const ChevronDown: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" {...props}>
-    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M6 9l6 6 6-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -42,7 +51,7 @@ const sizeHeights: Record<'sm' | 'md' | 'lg', number> = {
 /** ---------- Discriminated props (best practice) ---------- */
 type BaseProps = {
   options: RawOption[];
-  renderValue?: (selected: any) => React.ReactNode;
+  renderValue?: (selected: string | string[]) => React.ReactNode;
   sx?: object;
   disabled?: boolean;
   error?: boolean;
@@ -57,8 +66,8 @@ type BaseProps = {
   iconColor?: string;
 
   /** NEW: sizing */
-  height?: number | string;           // overrides size if provided
-  size?: 'sm' | 'md' | 'lg';          // default 'md'
+  height?: number | string; // overrides size if provided
+  size?: 'sm' | 'md' | 'lg'; // default 'md'
 };
 
 type SingleProps = BaseProps & {
@@ -111,7 +120,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return q
-      ? opts.filter(o => o.label.toLowerCase().includes(q) || o.value.toLowerCase().includes(q))
+      ? opts.filter((o) => o.label.toLowerCase().includes(q) || o.value.toLowerCase().includes(q))
       : opts;
   }, [opts, query]);
 
@@ -124,7 +133,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
   const handleChange = (e: SelectChangeEvent<string | string[]>) => {
     if (props.multiple) {
       const raw = e.target.value;
-      const arr = Array.isArray(raw) ? raw : (typeof raw === 'string' ? raw.split(',') : []);
+      const arr = Array.isArray(raw) ? raw : typeof raw === 'string' ? raw.split(',') : [];
       const synthetic = {
         ...e,
         target: { ...e.target, value: arr },
@@ -216,13 +225,13 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
     '&.Mui-selected.Mui-focusVisible': { bgcolor: 'var(--background-offset-weak)' },
   } as const;
 
-
-  const isEmpty = (sel: any) => (Array.isArray(sel) ? sel.length === 0 : !sel);
+  const isEmpty = (sel: string | string[] | null | undefined): boolean =>
+    Array.isArray(sel) ? sel.length === 0 : !sel;
 
   // -------- Renderers --------
-  const pillRenderValue = (selected: any) => {
+  const pillRenderValue = (selected: string | string[]) => {
     if (!props.multiple) {
-      const v = Array.isArray(selected) ? selected[0] ?? '' : selected;
+      const v = Array.isArray(selected) ? (selected[0] ?? '') : selected;
       if (!v) {
         return (
           <div className="flex items-center gap-2 w-full">
@@ -232,7 +241,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
           </div>
         );
       }
-      const lbl = opts.find(o => o.value === v)?.label ?? v;
+      const lbl = opts.find((o) => o.value === v)?.label ?? v;
       return (
         <div className="flex items-center gap-2 w-full">
           <span className="truncate">{truncateName(lbl, 28)}</span>
@@ -249,7 +258,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
       );
     }
 
-    const labels = arr.map(v => opts.find(o => o.value === v)?.label ?? v);
+    const labels = arr.map((v) => opts.find((o) => o.value === v)?.label ?? v);
     const summary = labels.length > 1 ? `${labels[0]} + ${labels.length - 1} more` : labels[0];
 
     const clear = (e: React.MouseEvent) => {
@@ -272,9 +281,9 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
     );
   };
 
-  const defaultRender =
+  const defaultRender: (selected: string | string[]) => React.ReactNode =
     renderValue ||
-    ((selected: any) => {
+    ((selected: string | string[]) => {
       if (isEmpty(selected)) {
         return (
           <span className="truncate bodyRegular" style={{ color: placeholderColor }}>
@@ -284,13 +293,13 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
       }
 
       if (!props.multiple) {
-        const v = Array.isArray(selected) ? selected[0] ?? '' : selected;
-        const lbl = opts.find(o => o.value === v)?.label ?? v;
+        const v = Array.isArray(selected) ? (selected[0] ?? '') : selected;
+        const lbl = opts.find((o) => o.value === v)?.label ?? v;
         return lbl;
       }
 
       const arr: string[] = Array.isArray(selected) ? selected : [];
-      const labels = arr.map(v => opts.find(o => o.value === v)?.label ?? v).join(', ');
+      const labels = arr.map((v) => opts.find((o) => o.value === v)?.label ?? v).join(', ');
       return truncateName(labels, 28);
     });
 
@@ -300,12 +309,16 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
   const hPx = toPx(height) ?? sizeHeights[size];
   const contentH = Math.max(16, hPx - 10); // inner text line height
   const iconDims =
-    hPx <= 30 ? { w: 14, h: 14, right: 6 } : hPx >= 46 ? { w: 18, h: 18, right: 8 } : { w: 16, h: 16, right: 8 };
+    hPx <= 30
+      ? { w: 14, h: 14, right: 6 }
+      : hPx >= 46
+        ? { w: 18, h: 18, right: 8 }
+        : { w: 16, h: 16, right: 8 };
 
   return (
     <Select
       multiple={props.multiple}
-      value={normalizedValue as any}
+      value={props.multiple ? (normalizedValue as string[]) : (normalizedValue as string)}
       onChange={handleChange}
       renderValue={isPill ? pillRenderValue : defaultRender}
       displayEmpty
@@ -415,8 +428,21 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
             role="search"
             aria-label="Filter options"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style={{ flex: '0 0 auto' }}>
-              <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" fill="none" stroke="var(--text-secondary)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              style={{ flex: '0 0 auto' }}
+            >
+              <path
+                d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
+                fill="none"
+                stroke="var(--text-secondary)"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             <input
               value={query}
@@ -437,12 +463,22 @@ export const CustomSelect: React.FC<CustomSelectProps> = (props) => {
         filtered.map((opt) => (
           <MenuItem key={opt.value} value={opt.value} sx={itemStyles}>
             <div className="flex items-center gap-3 w-full">
-              {showCheckbox && <CuteCheckbox
-                checked={Array.isArray(normalizedValue) ? normalizedValue.includes(opt.value) : normalizedValue === opt.value}
-                className="!p-0"
-              />}
-              {showAvatar && opt.avatarUrl && <Avatar src={opt.avatarUrl} sx={{ width: 26, height: 26 }} />}
-              {showIcon && opt.icon && <ListItemIcon className="min-w-0 mr-0">{opt.icon}</ListItemIcon>}
+              {showCheckbox && (
+                <CuteCheckbox
+                  checked={
+                    Array.isArray(normalizedValue)
+                      ? normalizedValue.includes(opt.value)
+                      : normalizedValue === opt.value
+                  }
+                  className="!p-0"
+                />
+              )}
+              {showAvatar && opt.avatarUrl && (
+                <Avatar src={opt.avatarUrl} sx={{ width: 26, height: 26 }} />
+              )}
+              {showIcon && opt.icon && (
+                <ListItemIcon className="min-w-0 mr-0">{opt.icon}</ListItemIcon>
+              )}
               <span className="text-text-primary bodyRegular">{truncateName(opt.label, 28)}</span>
             </div>
           </MenuItem>
