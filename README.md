@@ -18,8 +18,8 @@ We recommend using [nvm](https://github.com/nvm-sh/nvm) or [Volta](https://volta
 Clone the repo and install dependencies:
 
 ```bash
-git clone {re[o url]}
-cd dokaai-assignment
+git clone {repo url]}
+cd ui-assignment
 
 npm install
 
