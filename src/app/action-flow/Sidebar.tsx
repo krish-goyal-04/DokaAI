@@ -40,7 +40,7 @@ const Sidebar = () => {
       {displaySidebar ? (
         <aside className="w-[250px] bg-gray-900 border-r border-gray-600 flex flex-col">
           <div className="p-4 flex items-center justify-between">
-            <Image src="/Dokaai_Logo.png" width={60} height={10} alt="DokaAI Logo" />
+            <Image src="/Dokaai_Logo.png" width={50} height={10} alt="DokaAI Logo" />
             <FiChevronsLeft
               className="text-gray-300 text-lg cursor-pointer"
               onClick={toggleSidebar}
@@ -57,7 +57,7 @@ const Sidebar = () => {
             {topItems.map((item, i) => (
               <div
                 key={i}
-                className="flex items-center gap-3 px-3 py-2 rounded-md text-black hover:bg-green-300 cursor-pointer"
+                className="flex items-center gap-3 px-3 py-2 rounded-md text-black hover:bg-green-200/70 cursor-pointer"
               >
                 {item.icon}
                 <span>{item.name}</span>
@@ -67,7 +67,7 @@ const Sidebar = () => {
             {bottomItems.map((item, i) => (
               <div
                 key={i}
-                className="flex items-center gap-3 px-3 py-2 rounded-md text-black hover:bg-green-300 cursor-pointer"
+                className="flex items-center gap-3 px-3 py-2 rounded-md text-black hover:bg-green-200/70 cursor-pointer"
               >
                 {item.icon}
                 <span>{item.name}</span>
