@@ -5,18 +5,20 @@ import { Search } from '@/cuteui/components/searchbar';
 import { Button } from '@/cuteui/components/button/button';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
 const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
-  const { addNode, addEdge } = useContext(WorkFlowContext);
+  const context = useContext(WorkFlowContext);
+  if (!context) return null;
+  const { addNode, addEdge } = context as any;
 
   const [value, setValue] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
   const newNode = {
     id: 'Recipient',
     position: { x: 0, y: 100 },
-    data: { label: 'Recipeints', platform: value, searchQuery: searchValue },
+    data: { label: 'Recipients', platform: value, searchQuery: searchValue },
     type: 'recipient',
   };
 
-  const recipeientItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
+  const recipientItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between">
@@ -31,7 +33,7 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
               <CustomSelect
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                options={recipeientItems}
+                options={recipientItems}
                 placeholder="Choose an option"
                 size="sm"
                 height={42}
@@ -57,6 +59,7 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
         <Button
           text="Save"
           onClick={() => {
+            console.log('Adding recipient node:', newNode);
             addNode(newNode);
             closeOverlay();
           }}
