@@ -5,7 +5,7 @@ import { Button } from '@/cuteui/components/button/button';
 import { TextArea } from '@/cuteui/components/textarea';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
 // MultipleConditions overlay/modal lets the user define a group of conditions for advanced workflow branching.
-// This is used when you want to check several properties at once (e.g., user type AND country).
+
 const groupOperators: string[] = ['ALL must match', 'ANY can match'];
 const conditionFields: string[] = ['User Type', 'Country', 'Signup Age'];
 const operators: string[] = ['Equals', 'Not equals', 'Contains'];
@@ -32,7 +32,7 @@ const MultipleConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
   } as const;
 
   return (
-    // Modal overlay for multiple conditions configuration. Uses a slide-in animation for smooth UX.
+    // Modal overlay for multiple conditions configuration.
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
@@ -120,5 +120,4 @@ const MultipleConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
 };
 
 // This overlay is for advanced branching logic in the workflow.
-// If you want to add more fields or operators, update the dropdowns above.
 export default MultipleConditions;

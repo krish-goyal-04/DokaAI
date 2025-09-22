@@ -9,11 +9,11 @@ import Schedule from './components/Schedule';
 import ChannelRouter from './components/ChannelRouter';
 import IndividualChannels from './components/IndividualChannels';
 
-// WorkFlowPage is the main controller for the workflow node selection and configuration overlays.
-// It manages which node overlay/modal is open, and disables interaction if the workflow hasn't started yet.
+// This page is the main controller for the workflow node selection and configuration overlays.
+// It manages which node overlay is open, and disables interaction if the workflow hasn't started yet.
 // This is the entry point for users to add/configure each workflow step in the builder.
 const WorkFlowPage = ({ disabled = false }) => {
-  // Tracks which overlay/modal is currently open for node configuration.
+  // Tracks which overlay  is currently open for node configuration.
   // When null, no overlay is shown.
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null);
 
@@ -39,6 +39,5 @@ const WorkFlowPage = ({ disabled = false }) => {
   );
 };
 
-// This component is the glue between the workflow sidebar and the node configuration overlays.
-// If you want to add a new node type, just add it to the sidebar and render its overlay here.
+// This component is the connects the workflow sidebar and the node overlays.
 export default WorkFlowPage;

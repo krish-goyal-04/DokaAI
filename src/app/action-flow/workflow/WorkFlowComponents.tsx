@@ -9,9 +9,8 @@ import GroupsOutlined from '@mui/icons-material/GroupsOutlined';
 import CalendarMonthOutlined from '@mui/icons-material/CalendarMonthOutlined';
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 
-// WorkFlowComponents is the sidebar for selecting which workflow node to add/configure next.
-// Each button here represents a workflow step (Recipients, Conditions, etc.) and opens its overlay/modal.
-// If you want to add a new node type, just add it to the workflowItems array below.
+// This component is the sidebar for selecting which workflow node to add/configure next.
+// Each button here represents a workflow step (Recipients, Conditions, etc.) and opens its overlay.
 const workflowItems: {
   name: string;
   icon: React.ElementType;
@@ -50,6 +49,5 @@ const WorkFlowComponents = ({ onSelect }: { onSelect: (name: string) => void }) 
   );
 };
 
-// This sidebar is the user's main way to add/configure workflow steps.
-// If you want to change the order or add new steps, just update workflowItems above.
+// This sidebar is the user's way to add(configurations can be added, they arenot present currently) workflow steps.
 export default WorkFlowComponents;

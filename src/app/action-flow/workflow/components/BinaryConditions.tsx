@@ -4,7 +4,7 @@ import { CustomSelect } from '@/cuteui/components/custom-select';
 import { Button } from '@/cuteui/components/button/button';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
 import { TextArea } from '@/cuteui/components/textarea';
-// BinaryConditions overlay/modal lets the user define a single branching condition for the workflow.
+// BinaryConditions overlay lets the user define a single branching condition for the workflow.
 // This is used to split the workflow based on a property, operator, and value (e.g., user type, greater than, etc.).
 const conditionItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
 const dataPropertyItems: string[] = ['Influencer', 'Casual Users'];
@@ -46,7 +46,7 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
     },
   ];
 
-  // Define the new node to add to the workflow graph.
+  // Defining the new node to add to the workflow graph.
   // This node represents the binary condition and stores the selected values.
   const newNode = {
     id: 'BinaryConditions',
@@ -55,7 +55,7 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
     type: 'binaryConditions',
   };
 
-  // Define the edge connecting the Recipients node to the BinaryConditions node.
+  // Defining the edge connecting the Recipients node to the BinaryConditions node.
   // This visually links the audience selection to the condition logic.
   const newEdge = {
     id: 'Recipient-BinaryConditions',
@@ -149,5 +149,4 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
 };
 
 // This overlay is the user's way to add branching logic to the workflow.
-// If you want to add more operators or properties, update the dropdowns above.
 export default BinaryConditions;

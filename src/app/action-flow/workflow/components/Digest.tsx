@@ -8,8 +8,7 @@ import { WorkFlowContext } from '@/context/WorkFlowProvider';
 // List of available digest periods for the user to select from.
 const periods: string[] = ['Daily', 'Weekly', 'Monthly'];
 
-// Digest overlay/modal lets the user configure a digest node in the workflow.
-// This node is typically used to batch notifications or actions over a period.
+// Digest overlay lets the user configure a digest node in the workflow.
 const Digest = ({ closeOverlay }: { closeOverlay: () => void }) => {
   // Access workflow context to add nodes/edges to the graph.
   const context = useContext(WorkFlowContext);

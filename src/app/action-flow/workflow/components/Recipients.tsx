@@ -4,8 +4,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Search } from '@/cuteui/components/searchbar';
 import { Button } from '@/cuteui/components/button/button';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
-// Recipients overlay/modal lets the user pick which audience to target for notifications.
-// This is usually the first step in a workflow, and connects to the initial node.
+// Recipients overlay lets the user pick which audience to target for notifications.
+
 // The form collects the platform (Instagram, Twitter, etc.) and a search query for filtering users.
 const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
   // Access workflow context to add nodes and edges to the React Flow diagram.
@@ -41,7 +41,7 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
   const recipientItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
 
   return (
-    // Modal overlay for recipient selection. Uses a slide-in animation for smooth UX.
+    // Modal overlay for recipient selection.
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
@@ -113,5 +113,5 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
 };
 
 // This overlay is the user's first step in building a workflow.
-// If you want to add more fields or change the audience logic, update the form and node data above.
+
 export default Recipients;

@@ -9,7 +9,9 @@ import AltRouteOutlined from '@mui/icons-material/AltRouteOutlined';
 import GroupsOutlined from '@mui/icons-material/GroupsOutlined';
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 type AnyData = any;
-
+{
+  /*This component provides us with custom nodes with different display types, the data is passed from overlay componenets using data attribute in newNode component and then the data is used to diplay nodes, this componenet basically created nodes  */
+}
 export const RecipientNode = ({ data }: { data: AnyData }) => {
   return (
     <div className="p-2 bg-white rounded shadow flex flex-col w-[300px]">

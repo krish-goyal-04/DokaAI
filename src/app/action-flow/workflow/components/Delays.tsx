@@ -31,7 +31,7 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
   } as const;
 
   return (
-    // Modal overlay for delay configuration. Uses a slide-in animation for smooth UX.
+    // overlay for delay configuration.
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
@@ -105,5 +105,4 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
 };
 
 // This overlay is for adding wait steps to the workflow.
-// If you want to support more units or add logic, update the dropdowns and node data above.
 export default Delays;

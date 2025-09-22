@@ -6,7 +6,9 @@ import { FiBell } from 'react-icons/fi';
 import { pastActionData } from '@/utils/action_flow_data';
 import Link from 'next/link';
 const tableHeadItems: string[] = ['Action flow name', 'Description', 'Action'];
-
+{
+  /*This is the main landing page of action flow and theres a link to + button that redirects us to the workflow flow where actual flow chart or pipeline will be built. */
+}
 const ActionFlow = () => {
   return (
     <div className="flex min-h-screen">
