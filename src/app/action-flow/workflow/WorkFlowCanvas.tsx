@@ -1,8 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ReactFlow, Background, Controls } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
-import { BinaryConditionsNode, RecipientNode, InitialNode, MultipleConditionsNode, DelaysNode, DigestNode, ScheduleNode, ChannelRouterNode, IndividualChannelsNode, NextStepNode } from '@/hooks/useCustomNode';
+import {
+  BinaryConditionsNode,
+  RecipientNode,
+  InitialNode,
+  MultipleConditionsNode,
+  DelaysNode,
+  DigestNode,
+  ScheduleNode,
+  ChannelRouterNode,
+  IndividualChannelsNode,
+  NextStepNode,
+} from '@/hooks/useCustomNode';
 const nodeTypes = {
   initial: InitialNode,
   recipient: RecipientNode,

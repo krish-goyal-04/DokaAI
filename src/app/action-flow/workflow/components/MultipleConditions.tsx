@@ -21,7 +21,7 @@ const MultipleConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
 
   const newNode = {
     id: 'MultipleConditions',
-    position: { x: 0, y: 260 },
+    position: { x: 220, y: 450 },
     data: { label: 'Multiple Conditions', groupOp, field, operator, value },
     type: 'multipleConditions',
   } as const;
@@ -88,10 +88,18 @@ const MultipleConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
         />
         <style jsx>{`
           @keyframes slide-in {
-            from { opacity: 0; transform: translateX(-8px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+              opacity: 0;
+              transform: translateX(-8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-          .animate-slide-in { animation: slide-in 200ms ease-out; }
+          .animate-slide-in {
+            animation: slide-in 200ms ease-out;
+          }
         `}</style>
       </div>
     </div>

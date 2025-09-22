@@ -9,16 +9,25 @@ const strategies: string[] = ['Preference-based', 'Fallback', 'Round-robin'];
 const ChannelRouter = ({ closeOverlay }: { closeOverlay: () => void }) => {
   const context = useContext(WorkFlowContext);
   if (!context) return null;
-  const { addNode } = context;
+  const { addNode, addEdge } = context;
 
   const [strategy, setStrategy] = useState<string>('');
 
   const newNode = {
     id: 'ChannelRouter',
-    position: { x: 0, y: 500 },
+    position: { x: -220, y: 320 },
     data: { label: 'Channel Router', strategy },
     type: 'channelRouter',
   } as const;
+
+  const newEdge = {
+    id: 'binaryCondition-false_channel',
+    source: 'BinaryConditions',
+    target: 'ChannelRouter',
+    sourceHandle: 'binarycondition-output',
+    targetHandle: 'channelrouter-input',
+    type: '',
+  };
 
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
@@ -45,16 +54,25 @@ const ChannelRouter = ({ closeOverlay }: { closeOverlay: () => void }) => {
         <Button
           text="Save"
           onClick={() => {
-            addNode(newNode as any);
+            addNode(newNode);
+            addEdge(newEdge);
             closeOverlay();
           }}
         />
         <style jsx>{`
           @keyframes slide-in {
-            from { opacity: 0; transform: translateX(-8px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+              opacity: 0;
+              transform: translateX(-8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-          .animate-slide-in { animation: slide-in 200ms ease-out; }
+          .animate-slide-in {
+            animation: slide-in 200ms ease-out;
+          }
         `}</style>
       </div>
     </div>

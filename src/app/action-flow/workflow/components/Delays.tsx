@@ -18,7 +18,7 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
 
   const newNode = {
     id: 'Delays',
-    position: { x: 0, y: 320 },
+    position: { x: 220, y: 550 },
     data: { label: 'Delay', amount, unit, note },
     type: 'delays',
   } as const;
@@ -34,7 +34,12 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
           <div className="flex flex-col gap-6">
             <section>
               <p className="text-gray-500 mb-2">Delay amount</p>
-              <TextArea labelName="" height="40px" value={amount} onChange={(e) => setAmount(e.target.value)} />
+              <TextArea
+                labelName=""
+                height="40px"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
             </section>
             <section>
               <p className="text-gray-500 mb-2">Unit</p>
@@ -49,7 +54,12 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </section>
             <section>
               <p className="text-gray-500 mb-2">Note</p>
-              <TextArea labelName="" height="40px" value={note} onChange={(e) => setNote(e.target.value)} />
+              <TextArea
+                labelName=""
+                height="40px"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+              />
             </section>
           </div>
         </div>
@@ -62,10 +72,18 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
         />
         <style jsx>{`
           @keyframes slide-in {
-            from { opacity: 0; transform: translateX(-8px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+              opacity: 0;
+              transform: translateX(-8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-          .animate-slide-in { animation: slide-in 200ms ease-out; }
+          .animate-slide-in {
+            animation: slide-in 200ms ease-out;
+          }
         `}</style>
       </div>
     </div>

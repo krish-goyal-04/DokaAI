@@ -17,7 +17,7 @@ const Schedule = ({ closeOverlay }: { closeOverlay: () => void }) => {
 
   const newNode = {
     id: 'Schedule',
-    position: { x: 0, y: 440 },
+    position: { x: 220, y: 650 },
     data: { label: 'Schedule', scheduleType, cron },
     type: 'schedule',
   } as const;
@@ -44,7 +44,12 @@ const Schedule = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </section>
             <section>
               <p className="text-gray-500 mb-2">Cron / Time</p>
-              <TextArea labelName="" height="40px" value={cron} onChange={(e) => setCron(e.target.value)} />
+              <TextArea
+                labelName=""
+                height="40px"
+                value={cron}
+                onChange={(e) => setCron(e.target.value)}
+              />
             </section>
           </div>
         </div>
@@ -57,10 +62,18 @@ const Schedule = ({ closeOverlay }: { closeOverlay: () => void }) => {
         />
         <style jsx>{`
           @keyframes slide-in {
-            from { opacity: 0; transform: translateX(-8px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+              opacity: 0;
+              transform: translateX(-8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-          .animate-slide-in { animation: slide-in 200ms ease-out; }
+          .animate-slide-in {
+            animation: slide-in 200ms ease-out;
+          }
         `}</style>
       </div>
     </div>

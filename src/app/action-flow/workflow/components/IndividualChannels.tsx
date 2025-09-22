@@ -10,17 +10,26 @@ const channels: string[] = ['Email', 'SMS', 'Push'];
 const IndividualChannels = ({ closeOverlay }: { closeOverlay: () => void }) => {
   const context = useContext(WorkFlowContext);
   if (!context) return null;
-  const { addNode } = context;
+  const { addNode, addEdge } = context;
 
   const [channel, setChannel] = useState<string>('');
   const [content, setContent] = useState<string>('');
 
   const newNode = {
     id: 'IndividualChannels',
-    position: { x: 0, y: 560 },
+    position: { x: -220, y: 450 },
     data: { label: 'Channel', channel, content },
     type: 'individualChannels',
   } as const;
+
+  const newEdge = {
+    id: 'channelRouter_indivisualChannel',
+    source: 'ChannelRouter',
+    target: 'IndividualChannels',
+    sourceHandle: 'channelrouter-output',
+    targetHandle: 'individualchannels-input',
+    type: '',
+  };
 
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
@@ -44,7 +53,12 @@ const IndividualChannels = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </section>
             <section>
               <p className="text-gray-500 mb-2">Content</p>
-              <TextArea labelName="" height="40px" value={content} onChange={(e) => setContent(e.target.value)} />
+              <TextArea
+                labelName=""
+                height="40px"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
             </section>
           </div>
         </div>
@@ -52,15 +66,24 @@ const IndividualChannels = ({ closeOverlay }: { closeOverlay: () => void }) => {
           text="Save"
           onClick={() => {
             addNode(newNode as any);
+            addEdge(newEdge);
             closeOverlay();
           }}
         />
         <style jsx>{`
           @keyframes slide-in {
-            from { opacity: 0; transform: translateX(-8px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+              opacity: 0;
+              transform: translateX(-8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-          .animate-slide-in { animation: slide-in 200ms ease-out; }
+          .animate-slide-in {
+            animation: slide-in 200ms ease-out;
+          }
         `}</style>
       </div>
     </div>

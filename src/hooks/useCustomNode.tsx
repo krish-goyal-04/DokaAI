@@ -85,9 +85,21 @@ export const MultipleConditionsNode = ({ data }: { data: AnyData }) => {
         <DeviceHubOutlined fontSize="small" className="text-green-500" />
         <p className="justify-center text-md font-semibold">{data.label}</p>
       </div>
-      <p className="text-sm">{data.groupOp} — {data.field} {data.operator} {data.value}</p>
-      <Handle type="source" position={Position.Bottom} id="multipleconditions-output" style={{ background: 'gray' }} />
-      <Handle type="target" position={Position.Top} id="multipleconditions-input" style={{ background: 'gray' }} />
+      <p className="text-sm">
+        {data.groupOp} — {data.field} {data.operator} {data.value}
+      </p>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="multipleconditions-output"
+        style={{ background: 'gray' }}
+      />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="multipleconditions-input"
+        style={{ background: 'gray' }}
+      />
     </div>
   );
 };
@@ -99,10 +111,22 @@ export const DelaysNode = ({ data }: { data: AnyData }) => {
         <QueryBuilderOutlined fontSize="small" className="text-green-500" />
         <p className="justify-center text-md font-semibold">{data.label}</p>
       </div>
-      <p className="text-sm">Wait {data.amount} {data.unit}</p>
+      <p className="text-sm">
+        Wait {data.amount} {data.unit}
+      </p>
       {data.note && <p className="text-xs text-gray-500">{data.note}</p>}
-      <Handle type="source" position={Position.Bottom} id="delays-output" style={{ background: 'gray' }} />
-      <Handle type="target" position={Position.Top} id="delays-input" style={{ background: 'gray' }} />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="delays-output"
+        style={{ background: 'gray' }}
+      />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="delays-input"
+        style={{ background: 'gray' }}
+      />
     </div>
   );
 };
@@ -114,9 +138,21 @@ export const DigestNode = ({ data }: { data: AnyData }) => {
         <ChatBubbleOutlineOutlined fontSize="small" className="text-green-500" />
         <p className="justify-center text-md font-semibold">{data.label}</p>
       </div>
-      <p className="text-sm">{data.period} — {data.title}</p>
-      <Handle type="source" position={Position.Bottom} id="digest-output" style={{ background: 'gray' }} />
-      <Handle type="target" position={Position.Top} id="digest-input" style={{ background: 'gray' }} />
+      <p className="text-sm">
+        {data.period} — {data.title}
+      </p>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="digest-output"
+        style={{ background: 'gray' }}
+      />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="digest-input"
+        style={{ background: 'gray' }}
+      />
     </div>
   );
 };
@@ -128,9 +164,22 @@ export const ScheduleNode = ({ data }: { data: AnyData }) => {
         <DescriptionOutlined fontSize="small" className="text-green-500" />
         <p className="justify-center text-md font-semibold">{data.label}</p>
       </div>
-      <p className="text-sm">{data.scheduleType}{data.cron ? ` — ${data.cron}` : ''}</p>
-      <Handle type="source" position={Position.Bottom} id="schedule-output" style={{ background: 'gray' }} />
-      <Handle type="target" position={Position.Top} id="schedule-input" style={{ background: 'gray' }} />
+      <p className="text-sm">
+        {data.scheduleType}
+        {data.cron ? ` — ${data.cron}` : ''}
+      </p>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="schedule-output"
+        style={{ background: 'gray' }}
+      />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="schedule-input"
+        style={{ background: 'gray' }}
+      />
     </div>
   );
 };
@@ -143,8 +192,18 @@ export const ChannelRouterNode = ({ data }: { data: AnyData }) => {
         <p className="justify-center text-md font-semibold">{data.label}</p>
       </div>
       <p className="text-sm">Strategy: {data.strategy}</p>
-      <Handle type="source" position={Position.Bottom} id="channelrouter-output" style={{ background: 'gray' }} />
-      <Handle type="target" position={Position.Top} id="channelrouter-input" style={{ background: 'gray' }} />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="channelrouter-output"
+        style={{ background: 'gray' }}
+      />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="channelrouter-input"
+        style={{ background: 'gray' }}
+      />
     </div>
   );
 };
@@ -158,8 +217,18 @@ export const IndividualChannelsNode = ({ data }: { data: AnyData }) => {
       </div>
       <p className="text-sm">{data.channel}</p>
       {data.content && <p className="text-xs text-gray-500">{data.content}</p>}
-      <Handle type="source" position={Position.Bottom} id="individualchannels-output" style={{ background: 'gray' }} />
-      <Handle type="target" position={Position.Top} id="individualchannels-input" style={{ background: 'gray' }} />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="individualchannels-output"
+        style={{ background: 'gray' }}
+      />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="individualchannels-input"
+        style={{ background: 'gray' }}
+      />
     </div>
   );
 };
@@ -171,8 +240,18 @@ export const NextStepNode = ({ data }: { data: AnyData }) => {
         <AddCircleOutline fontSize="small" className="text-green-500" />
         <p className="justify-center text-md font-semibold">{data.label}</p>
       </div>
-      <Handle type="source" position={Position.Bottom} id="nextnode-output" style={{ background: 'gray' }} />
-      <Handle type="target" position={Position.Top} id="nextnode-input" style={{ background: 'gray' }} />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="nextnode-output"
+        style={{ background: 'gray' }}
+      />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="nextnode-input"
+        style={{ background: 'gray' }}
+      />
     </div>
   );
 };

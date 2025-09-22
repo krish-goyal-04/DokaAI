@@ -10,17 +10,26 @@ const periods: string[] = ['Daily', 'Weekly', 'Monthly'];
 const Digest = ({ closeOverlay }: { closeOverlay: () => void }) => {
   const context = useContext(WorkFlowContext);
   if (!context) return null;
-  const { addNode } = context;
+  const { addNode, addEdge } = context;
 
   const [period, setPeriod] = useState<string>('');
   const [title, setTitle] = useState<string>('');
 
   const newNode = {
     id: 'Digest',
-    position: { x: 0, y: 380 },
+    position: { x: 220, y: 320 },
     data: { label: 'Digest', period, title },
     type: 'digest',
   } as const;
+
+  const newEdge = {
+    id: 'binaryCondition-true_channel',
+    source: 'BinaryConditions',
+    target: 'Digest',
+    sourceHandle: 'binarycondition-output',
+    targetHandle: 'digest-input',
+    type: '',
+  };
 
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
@@ -44,7 +53,12 @@ const Digest = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </section>
             <section>
               <p className="text-gray-500 mb-2">Title</p>
-              <TextArea labelName="" height="40px" value={title} onChange={(e) => setTitle(e.target.value)} />
+              <TextArea
+                labelName=""
+                height="40px"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </section>
           </div>
         </div>
@@ -52,15 +66,24 @@ const Digest = ({ closeOverlay }: { closeOverlay: () => void }) => {
           text="Save"
           onClick={() => {
             addNode(newNode as any);
+            addEdge(newEdge);
             closeOverlay();
           }}
         />
         <style jsx>{`
           @keyframes slide-in {
-            from { opacity: 0; transform: translateX(-8px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+              opacity: 0;
+              transform: translateX(-8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-          .animate-slide-in { animation: slide-in 200ms ease-out; }
+          .animate-slide-in {
+            animation: slide-in 200ms ease-out;
+          }
         `}</style>
       </div>
     </div>
