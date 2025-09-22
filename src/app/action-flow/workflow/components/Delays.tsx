@@ -1,3 +1,5 @@
+// Delays overlay/modal lets the user add a wait step to the workflow.
+
 import React, { useContext, useState } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { CustomSelect } from '@/cuteui/components/custom-select';
@@ -5,17 +7,22 @@ import { Button } from '@/cuteui/components/button/button';
 import { TextArea } from '@/cuteui/components/textarea';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
 
+// This is useful for pausing notifications or actions for a set time (e.g., wait 2 hours before next step).
 const units: string[] = ['Minutes', 'Hours', 'Days'];
 
 const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
+  // Access workflow context to add nodes to the React Flow diagram.
   const context = useContext(WorkFlowContext);
   if (!context) return null;
   const { addNode } = context;
 
+  // State for each form field: amount, unit, and note.
   const [amount, setAmount] = useState<string>('');
   const [unit, setUnit] = useState<string>('');
   const [note, setNote] = useState<string>('');
 
+  // Define the new node to add to the workflow graph.
+  // This node represents the delay and stores the selected values.
   const newNode = {
     id: 'Delays',
     position: { x: 220, y: 550 },
@@ -24,14 +31,17 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
   } as const;
 
   return (
+    // Modal overlay for delay configuration. Uses a slide-in animation for smooth UX.
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
+          {/* Header with back arrow and title. */}
           <div className="flex gap-4 items-center mb-6">
             <ArrowBackIcon onClick={closeOverlay} className="cursor-pointer" />
             <h2 className="text-sm font-semibold flex text-black">Add delay</h2>
           </div>
           <div className="flex flex-col gap-6">
+            {/* Text input for delay amount. */}
             <section>
               <p className="text-gray-500 mb-2">Delay amount</p>
               <TextArea
@@ -41,6 +51,7 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
                 onChange={(e) => setAmount(e.target.value)}
               />
             </section>
+            {/* Dropdown for unit (minutes, hours, days). */}
             <section>
               <p className="text-gray-500 mb-2">Unit</p>
               <CustomSelect
@@ -52,6 +63,7 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
                 height={42}
               />
             </section>
+            {/* Text input for an optional note. */}
             <section>
               <p className="text-gray-500 mb-2">Note</p>
               <TextArea
@@ -63,6 +75,7 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </section>
           </div>
         </div>
+        {/* Save button adds the node, then closes the overlay. */}
         <Button
           text="Save"
           onClick={() => {
@@ -70,6 +83,7 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
             closeOverlay();
           }}
         />
+        {/* Slide-in animation for the modal. */}
         <style jsx>{`
           @keyframes slide-in {
             from {
@@ -90,4 +104,6 @@ const Delays = ({ closeOverlay }: { closeOverlay: () => void }) => {
   );
 };
 
+// This overlay is for adding wait steps to the workflow.
+// If you want to support more units or add logic, update the dropdowns and node data above.
 export default Delays;

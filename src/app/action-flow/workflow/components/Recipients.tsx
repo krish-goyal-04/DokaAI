@@ -4,13 +4,21 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Search } from '@/cuteui/components/searchbar';
 import { Button } from '@/cuteui/components/button/button';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
+// Recipients overlay/modal lets the user pick which audience to target for notifications.
+// This is usually the first step in a workflow, and connects to the initial node.
+// The form collects the platform (Instagram, Twitter, etc.) and a search query for filtering users.
 const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
+  // Access workflow context to add nodes and edges to the React Flow diagram.
   const context = useContext(WorkFlowContext);
   if (!context) return null;
   const { addNode, addEdge } = context as any;
 
+  // State for the selected platform and search query.
   const [value, setValue] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
+
+  // Define the new node to add to the workflow graph.
+  // This node represents the Recipients step and stores the selected values.
   const newNode = {
     id: 'Recipient',
     position: { x: 0, y: 100 },
@@ -18,6 +26,8 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
     type: 'recipient',
   };
 
+  // Define the edge connecting the initial node to the Recipients node.
+  // This visually links the start of the workflow to the audience selection.
   const newEdge = {
     id: 'Initial-Recipient',
     source: 'InitialNode',
@@ -27,16 +37,21 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
     type: 'smoothstep',
   };
 
+  // List of available platforms for audience selection.
   const recipientItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
+
   return (
+    // Modal overlay for recipient selection. Uses a slide-in animation for smooth UX.
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
+          {/* Header with back arrow and title. */}
           <div className="flex gap-4 items-center mb-6">
             <ArrowBackIcon onClick={closeOverlay} className="cursor-pointer" />
             <h2 className="text-sm font-semibold flex text-black">Choose recipient type</h2>
           </div>
           <div className="flex flex-col gap-8">
+            {/* Platform selection dropdown. */}
             <section>
               <p className="text-gray-500 mb-2">Customer Pool</p>
               <CustomSelect
@@ -48,6 +63,7 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
                 height={42}
               />
             </section>
+            {/* Search bar for filtering target audience. */}
             <section>
               <Search
                 placeholderText="Search target audience"
@@ -55,6 +71,7 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
               />
+              {/* Show feedback based on search input. */}
               {searchValue === '' ? (
                 <p className="text-gray-400 mt-2 text-sm ml-5">No recipient selected</p>
               ) : (
@@ -65,6 +82,7 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </section>
           </div>
         </div>
+        {/* Save button adds the node and edge, then closes the overlay. */}
         <Button
           text="Save"
           onClick={() => {
@@ -73,15 +91,27 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
             closeOverlay();
           }}
         />
+        {/* Slide-in animation for the modal. */}
         <style jsx>{`
           @keyframes slide-in {
-            from { opacity: 0; transform: translateX(-8px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+              opacity: 0;
+              transform: translateX(-8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-          .animate-slide-in { animation: slide-in 200ms ease-out; }
+          .animate-slide-in {
+            animation: slide-in 200ms ease-out;
+          }
         `}</style>
       </div>
     </div>
   );
 };
+
+// This overlay is the user's first step in building a workflow.
+// If you want to add more fields or change the audience logic, update the form and node data above.
 export default Recipients;

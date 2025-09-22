@@ -4,9 +4,9 @@ import { CustomSelect } from '@/cuteui/components/custom-select';
 import { Button } from '@/cuteui/components/button/button';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
 import { TextArea } from '@/cuteui/components/textarea';
-
+// BinaryConditions overlay/modal lets the user define a single branching condition for the workflow.
+// This is used to split the workflow based on a property, operator, and value (e.g., user type, greater than, etc.).
 const conditionItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
-
 const dataPropertyItems: string[] = ['Influencer', 'Casual Users'];
 const operators: string[] = [
   'Is equal to',
@@ -17,13 +17,18 @@ const operators: string[] = [
 ];
 
 const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
+  // Access workflow context to add nodes and edges to the React Flow diagram.
   const context = useContext(WorkFlowContext);
   if (!context) return null;
   const { addNode, addEdge } = context as any;
+
+  // State for each form field: condition name, operator, property, and value.
   const [value, setValue] = useState<string>('');
   const [operator, setOperator] = useState<string>('');
   const [dataProp, setDataProp] = useState<string>('');
   const [inputValue, setInputValue] = useState<string>('');
+
+  // Helper array for rendering dropdowns for property and operator.
   const displayItems = [
     {
       title: 'Data Property',
@@ -40,6 +45,9 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
       placeholder: 'Select operator',
     },
   ];
+
+  // Define the new node to add to the workflow graph.
+  // This node represents the binary condition and stores the selected values.
   const newNode = {
     id: 'BinaryConditions',
     position: { x: 0, y: 200 },
@@ -47,6 +55,8 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
     type: 'binaryConditions',
   };
 
+  // Define the edge connecting the Recipients node to the BinaryConditions node.
+  // This visually links the audience selection to the condition logic.
   const newEdge = {
     id: 'Recipient-BinaryConditions',
     source: 'Recipient',
@@ -55,15 +65,19 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
     targetHandle: 'binarycondition-input',
     type: 'smoothstep',
   };
+
   return (
+    // Modal overlay for binary condition configuration. Uses a slide-in animation for smooth UX.
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
+          {/* Header with back arrow and title. */}
           <div className="flex gap-4 items-center mb-6">
             <ArrowBackIcon onClick={closeOverlay} className="cursor-pointer" />
             <h2 className="text-sm font-semibold flex text-black">Add condition details</h2>
           </div>
           <div className="flex flex-col gap-6">
+            {/* Dropdown for condition name. */}
             <section>
               <p className="text-gray-500 mb-2">Condition name</p>
               <CustomSelect
@@ -75,6 +89,7 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
                 height={42}
               />
             </section>
+            {/* Dropdowns for property and operator, plus value input. */}
             <div className="flex flex-col gap-5 p-3">
               {displayItems.map((item, ind) => (
                 <section key={ind}>
@@ -89,6 +104,7 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
                   />
                 </section>
               ))}
+              {/* Text input for the condition value. */}
               <section>
                 <p className="text-gray-500">Value</p>
                 <TextArea
@@ -102,6 +118,7 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </div>
           </div>
         </div>
+        {/* Save button adds the node and edge, then closes the overlay. */}
         <Button
           text="Save"
           onClick={() => {
@@ -110,6 +127,7 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
             closeOverlay();
           }}
         />
+        {/* Slide-in animation for the modal. */}
         <style jsx>{`
           @keyframes slide-in {
             from {
@@ -130,4 +148,6 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
   );
 };
 
+// This overlay is the user's way to add branching logic to the workflow.
+// If you want to add more operators or properties, update the dropdowns above.
 export default BinaryConditions;

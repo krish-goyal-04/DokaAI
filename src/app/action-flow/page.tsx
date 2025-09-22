@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import Image from 'next/image';
 import { FiBell } from 'react-icons/fi';
 import { pastActionData } from '@/utils/action_flow_data';
-
+import Link from 'next/link';
 const tableHeadItems: string[] = ['Action flow name', 'Description', 'Action'];
 
 const ActionFlow = () => {
@@ -35,9 +35,11 @@ const ActionFlow = () => {
             placeholder="Search flow"
             className="w-full max-w-md px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
           ></input>
-          <button className="p-2 border rounded-lg hover:bg-gray-100">
-            <Image src="/components/add.svg" height={20} width={20} alt="Add" />
-          </button>
+          <Link href="/action-flow/workflow">
+            <button className="p-2 border rounded-lg hover:bg-gray-100">
+              <Image src="/components/add.svg" height={20} width={20} alt="Add" />
+            </button>
+          </Link>
         </div>
 
         {/* Table */}

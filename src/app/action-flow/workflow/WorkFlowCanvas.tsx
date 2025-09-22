@@ -14,6 +14,9 @@ import {
   IndividualChannelsNode,
   NextStepNode,
 } from '@/hooks/useCustomNode';
+
+// This object maps each workflow node type to its custom React component.
+// If we add a new node type, just we need to drop it here and React Flow will render it.
 const nodeTypes = {
   initial: InitialNode,
   recipient: RecipientNode,
@@ -27,14 +30,33 @@ const nodeTypes = {
   next: NextStepNode,
 };
 
+// This is the main canvas for visualizing our workflow as a flowchart.
+// It uses React Flow to render nodes and edges which is made global using context API, and pulls data from context.
 const WorkFlowCanvas = () => {
+  // Get the workflow state from context. This gives us all the nodes and edges to display.
   const context = useContext(WorkFlowContext);
-  if (!context) return null;
+  if (!context) return null; // If context isn't ready, don't render anything.
   const { nodes, edges } = context;
+
+  // ReactFlow is the engine that draws the workflow diagram.
+  // We pass in our nodes, edges, and custom node types.
+  // The fitView prop makes sure everything fits nicely in the viewport.
   return (
     <ReactFlow nodes={nodes} fitView edges={edges} nodeTypes={nodeTypes}>
+      {/* Adds a subtle grid background to help users orient themselves. */}
       <Background />
-      <Controls />
+      {/* Custom controls for zoom, fit view, and interactivity. Positioned at the bottom center. */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '20px', // Keep controls off the main canvas area
+          left: '50%', // Center horizontally
+          transform: 'translateX(-50%) rotate(270deg)', // Rotate for style
+          zIndex: 10,
+        }}
+      >
+        <Controls showZoom={true} showFitView={true} showInteractive={true} />
+      </div>
     </ReactFlow>
   );
 };
