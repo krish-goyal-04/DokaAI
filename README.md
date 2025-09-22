@@ -6,15 +6,19 @@ The codebase follows a modular structure with reusable CuteUI components.
 
 ---
 
+### COMMENTS ARE ADDED INLINE
+
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js**: v20.17.0 (LTS)  
-- **npm**: v11+ (comes with Node 20.17)  
+
+- **Node.js**: v20.17.0 (LTS)
+- **npm**: v11+ (comes with Node 20.17)
 
 We recommend using [nvm](https://github.com/nvm-sh/nvm) or [Volta](https://volta.sh) to manage Node versions.
 
 ### Installation
+
 Clone the repo and install dependencies:
 
 ```bash
@@ -29,5 +33,3 @@ npm build
 
 npm start
 ```
-
-
