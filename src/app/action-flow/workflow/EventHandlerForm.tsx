@@ -3,11 +3,18 @@ import { CustomSelect } from '@/cuteui/components/custom-select';
 import { useState } from 'react';
 import { Search } from '@/cuteui/components/searchbar';
 import { Button } from '@/cuteui/components/button/button';
+import type { Node } from '@xyflow/react';
 
 const tags = ['Tag-1', 'Tag-2', 'Tag-3'];
 const notificationTypes = ['Type-1', 'Type-2', 'Type-3'];
 
-const EventHandlerForm = ({ setInitialNode, setWorkflowName, setDisplayForm }) => {
+type EventHandlerFormProps = {
+  setInitialNode: (nodes: Node[]) => void;
+  setWorkflowName: (name: string) => void;
+  setDisplayForm: (open: boolean) => void;
+};
+
+const EventHandlerForm = ({ setInitialNode, setWorkflowName, setDisplayForm }: EventHandlerFormProps) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [tag, setTag] = useState('');
@@ -23,7 +30,7 @@ const EventHandlerForm = ({ setInitialNode, setWorkflowName, setDisplayForm }) =
   ];
   return (
     <div className="fixed z-50 flex items-stretch mt-5" style={{ top: '64px', left: 0 }}>
-      <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
           <div className="flex gap-4 items-center mb-6">
             <h2 className="text-sm font-semibold flex text-black">Event Handler Details</h2>
@@ -80,6 +87,13 @@ const EventHandlerForm = ({ setInitialNode, setWorkflowName, setDisplayForm }) =
             setDisplayForm(false);
           }}
         />
+        <style jsx>{`
+          @keyframes slide-in {
+            from { opacity: 0; transform: translateX(-8px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+          .animate-slide-in { animation: slide-in 200ms ease-out; }
+        `}</style>
       </div>
     </div>
   );

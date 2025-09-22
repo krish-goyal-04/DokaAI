@@ -30,7 +30,7 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
   const recipientItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
-      <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
           <div className="flex gap-4 items-center mb-6">
             <ArrowBackIcon onClick={closeOverlay} className="cursor-pointer" />
@@ -73,6 +73,13 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
             closeOverlay();
           }}
         />
+        <style jsx>{`
+          @keyframes slide-in {
+            from { opacity: 0; transform: translateX(-8px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+          .animate-slide-in { animation: slide-in 200ms ease-out; }
+        `}</style>
       </div>
     </div>
   );
