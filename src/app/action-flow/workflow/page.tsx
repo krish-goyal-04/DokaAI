@@ -11,7 +11,7 @@ import EventHandlerForm from './EventHandlerForm';
 const CanvasPage = () => {
   const [startClicked, setStartClicked] = useState(false);
   const [displayForm, setDisplayForm] = useState(false);
-  const [workflowName, setWorkflowName] = useState('Untilted');
+  const [workflowName, setWorkflowName] = useState('Untitled');
   const [initialNode, setInitialNode] = useState([]);
 
   const handleStart = (e) => {

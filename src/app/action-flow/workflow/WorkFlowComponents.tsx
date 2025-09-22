@@ -22,7 +22,7 @@ const workflowItems: {
   { name: 'Digest', icon: FiInbox, component: 'Digest' },
   { name: 'Schedule', icon: FiCalendar, component: 'Schedule' },
   { name: 'Channel Router', icon: FiRepeat, component: 'ChannelRouter' },
-  { name: 'Indivisual Channels', icon: FiGrid, component: 'IndivisualChannels' },
+  { name: 'Individual Channels', icon: FiGrid, component: 'IndividualChannels' },
   { name: 'Next Node', icon: FiArrowRight, component: 'NextNode' },
 ];
 

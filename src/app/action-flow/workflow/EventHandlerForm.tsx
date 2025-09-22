@@ -17,13 +17,13 @@ const EventHandlerForm = ({ setInitialNode, setWorkflowName, setDisplayForm }) =
     {
       id: 'InitialNode',
       position: { x: 0, y: 0 },
-      data: { label: name },
+      data: { label: name, description: description },
       type: 'initial',
     },
   ];
   return (
-    <div className="absolute z-50 flex w-[500px] h-full left-0">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full flex flex-col justify-between">
+    <div className="fixed z-50 flex items-stretch mt-5" style={{ top: '64px', left: 0 }}>
+      <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between">
         <div>
           <div className="flex gap-4 items-center mb-6">
             <h2 className="text-sm font-semibold flex text-black">Event Handler Details</h2>
@@ -33,6 +33,7 @@ const EventHandlerForm = ({ setInitialNode, setWorkflowName, setDisplayForm }) =
               <p className="text-gray-500 ">Name</p>
               <TextArea
                 labelName=""
+                value={name}
                 height="40px"
                 required
                 onChange={(e) => setName(e.target.value)}

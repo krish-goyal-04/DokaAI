@@ -19,7 +19,7 @@ const operators: string[] = [
 const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
   const context = useContext(WorkFlowContext);
   if (!context) return null;
-  const { nodes, addNode, addEdge, edges } = context as any;
+  const { addNode, addEdge } = context as any;
   const [value, setValue] = useState<string>('');
   const [operator, setOperator] = useState<string>('');
   const [dataProp, setDataProp] = useState<string>('');
@@ -51,6 +51,9 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
     id: 'Recipient-BinaryConditions',
     source: 'Recipient',
     target: 'BinaryConditions',
+    sourceHandle: 'recipient-output',
+    targetHandle: 'binarycondition-input',
+    type: 'smoothstep',
   };
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>

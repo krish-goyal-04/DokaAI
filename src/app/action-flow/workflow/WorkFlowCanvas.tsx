@@ -12,7 +12,7 @@ const nodeTypes = {
 const WorkFlowCanvas = () => {
   const { nodes, edges, addNode, addEdge } = useContext(WorkFlowContext);
   return (
-    <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes}>
+    <ReactFlow nodes={nodes} fitView edges={edges} nodeTypes={nodeTypes}>
       <Background />
       <Controls />
     </ReactFlow>

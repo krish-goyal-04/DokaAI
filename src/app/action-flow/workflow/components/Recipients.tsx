@@ -18,6 +18,15 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
     type: 'recipient',
   };
 
+  const newEdge = {
+    id: 'Initial-Recipient',
+    source: 'InitialNode',
+    target: 'Recipient',
+    sourceHandle: 'initial-output',
+    targetHandle: 'recipient-input',
+    type: 'smoothstep',
+  };
+
   const recipientItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
@@ -59,8 +68,8 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
         <Button
           text="Save"
           onClick={() => {
-            console.log('Adding recipient node:', newNode);
             addNode(newNode);
+            addEdge(newEdge);
             closeOverlay();
           }}
         />
