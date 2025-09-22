@@ -1,29 +1,28 @@
-import {
-  FiUsers,
-  FiCheckCircle,
-  FiLayers,
-  FiClock,
-  FiInbox,
-  FiCalendar,
-  FiRepeat,
-  FiGrid,
-  FiArrowRight,
-} from 'react-icons/fi';
+import StorageOutlined from '@mui/icons-material/StorageOutlined';
+import CallSplitOutlined from '@mui/icons-material/CallSplitOutlined';
+import DeviceHubOutlined from '@mui/icons-material/DeviceHubOutlined';
+import QueryBuilderOutlined from '@mui/icons-material/QueryBuilderOutlined';
+import ChatBubbleOutlineOutlined from '@mui/icons-material/ChatBubbleOutlineOutlined';
+import DescriptionOutlined from '@mui/icons-material/DescriptionOutlined';
+import AltRouteOutlined from '@mui/icons-material/AltRouteOutlined';
+import GroupsOutlined from '@mui/icons-material/GroupsOutlined';
+import CalendarMonthOutlined from '@mui/icons-material/CalendarMonthOutlined';
+import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 
 const workflowItems: {
   name: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ElementType;
   component: string;
 }[] = [
-  { name: 'Recipients', icon: FiUsers, component: 'Recipients' },
-  { name: 'Binary Conditions', icon: FiCheckCircle, component: 'BinaryConditions' },
-  { name: 'Multiple Conditions', icon: FiLayers, component: 'MultipleConditions' },
-  { name: 'Delays', icon: FiClock, component: 'Delays' },
-  { name: 'Digest', icon: FiInbox, component: 'Digest' },
-  { name: 'Schedule', icon: FiCalendar, component: 'Schedule' },
-  { name: 'Channel Router', icon: FiRepeat, component: 'ChannelRouter' },
-  { name: 'Individual Channels', icon: FiGrid, component: 'IndividualChannels' },
-  { name: 'Next Node', icon: FiArrowRight, component: 'NextNode' },
+  { name: 'Recipients', icon: StorageOutlined, component: 'Recipients' },
+  { name: 'Binary Conditions', icon: CallSplitOutlined, component: 'BinaryConditions' },
+  { name: 'Multiple Conditions', icon: DeviceHubOutlined, component: 'MultipleConditions' },
+  { name: 'Delays', icon: QueryBuilderOutlined, component: 'Delays' },
+  { name: 'Digest', icon: ChatBubbleOutlineOutlined, component: 'Digest' },
+  { name: 'Schedule', icon: DescriptionOutlined, component: 'Schedule' },
+  { name: 'Channel Router', icon: AltRouteOutlined, component: 'ChannelRouter' },
+  { name: 'Individual Channels', icon: GroupsOutlined, component: 'IndividualChannels' },
+  { name: 'Next Node', icon: AddCircleOutline, component: 'NextNode' },
 ];
 
 const WorkFlowComponents = ({ onSelect }: { onSelect: (name: string) => void }) => {
@@ -37,7 +36,7 @@ const WorkFlowComponents = ({ onSelect }: { onSelect: (name: string) => void }) 
             onClick={() => onSelect(component)}
             className="flex items-center gap-3 px-3 py-2 rounded  w-full text-left"
           >
-            <Icon size={18} className="text-green-500" />
+            <Icon className="text-black" fontSize="small" />
           </button>
         ))}
       </div>
