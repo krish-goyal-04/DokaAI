@@ -20,7 +20,7 @@ const ChannelRouter = ({ closeOverlay }: { closeOverlay: () => void }) => {
     type: 'channelRouter',
   } as const;
 
-  const newEdge = {
+  /*const newEdge = {
     id: 'binaryCondition-false_channel',
     source: 'BinaryConditions',
     target: 'ChannelRouter',
@@ -28,7 +28,7 @@ const ChannelRouter = ({ closeOverlay }: { closeOverlay: () => void }) => {
     targetHandle: 'channelrouter-input',
     type: '',
   };
-
+*/
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
@@ -55,7 +55,7 @@ const ChannelRouter = ({ closeOverlay }: { closeOverlay: () => void }) => {
           text="Save"
           onClick={() => {
             addNode(newNode);
-            addEdge(newEdge);
+            //addEdge(newEdge);
             closeOverlay();
           }}
         />

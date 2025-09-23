@@ -22,14 +22,14 @@ const IndividualChannels = ({ closeOverlay }: { closeOverlay: () => void }) => {
     type: 'individualChannels',
   } as const;
 
-  const newEdge = {
+  /*const newEdge = {
     id: 'channelRouter_indivisualChannel',
     source: 'ChannelRouter',
     target: 'IndividualChannels',
     sourceHandle: 'channelrouter-output',
     targetHandle: 'individualchannels-input',
     type: '',
-  };
+  };*/
 
   return (
     <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
@@ -66,7 +66,7 @@ const IndividualChannels = ({ closeOverlay }: { closeOverlay: () => void }) => {
           text="Save"
           onClick={() => {
             addNode(newNode as any);
-            addEdge(newEdge);
+            //addEdge(newEdge);
             closeOverlay();
           }}
         />

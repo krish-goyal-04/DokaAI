@@ -57,14 +57,14 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
 
   // Defining the edge connecting the Recipients node to the BinaryConditions node.
   // This visually links the audience selection to the condition logic.
-  const newEdge = {
+  /*const newEdge = {
     id: 'Recipient-BinaryConditions',
     source: 'Recipient',
     target: 'BinaryConditions',
     sourceHandle: 'recipient-output',
     targetHandle: 'binarycondition-input',
     type: 'smoothstep',
-  };
+  };*/
 
   return (
     // Modal overlay for binary condition configuration. Uses a slide-in animation for smooth UX.
@@ -123,7 +123,7 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
           text="Save"
           onClick={() => {
             addNode(newNode);
-            addEdge(newEdge);
+            //addEdge(newEdge);
             closeOverlay();
           }}
         />

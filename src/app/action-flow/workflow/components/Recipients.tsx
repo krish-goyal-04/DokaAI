@@ -28,14 +28,15 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
 
   // Define the edge connecting the initial node to the Recipients node.
   // This visually links the start of the workflow to the audience selection.
-  const newEdge = {
+
+  /*const newEdge = {
     id: 'Initial-Recipient',
     source: 'InitialNode',
     target: 'Recipient',
     sourceHandle: 'initial-output',
     targetHandle: 'recipient-input',
     type: 'smoothstep',
-  };
+  };*/
 
   // List of available platforms for audience selection.
   const recipientItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
@@ -87,7 +88,7 @@ const Recipients = ({ closeOverlay }: { closeOverlay: () => void }) => {
           text="Save"
           onClick={() => {
             addNode(newNode);
-            addEdge(newEdge);
+            //addEdge(newEdge);
             closeOverlay();
           }}
         />

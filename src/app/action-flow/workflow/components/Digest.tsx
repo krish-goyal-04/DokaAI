@@ -26,14 +26,14 @@ const Digest = ({ closeOverlay }: { closeOverlay: () => void }) => {
   } as const;
 
   // Edge object representing the connection from a condition node to this digest node.
-  const newEdge = {
+  /*const newEdge = {
     id: 'binaryCondition-true_channel',
     source: 'BinaryConditions',
     target: 'Digest',
     sourceHandle: 'binarycondition-output',
     targetHandle: 'digest-input',
     type: '',
-  };
+  };*/
 
   // Render the digest configuration overlay/modal.
   return (
@@ -75,7 +75,7 @@ const Digest = ({ closeOverlay }: { closeOverlay: () => void }) => {
           text="Save"
           onClick={() => {
             addNode(newNode as any);
-            addEdge(newEdge);
+            //addEdge(newEdge);
             closeOverlay();
           }}
         />

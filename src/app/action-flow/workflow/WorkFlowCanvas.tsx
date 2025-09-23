@@ -1,5 +1,12 @@
-import React, { useContext, useEffect } from 'react';
-import { ReactFlow, Background, Controls } from '@xyflow/react';
+import React, { useCallback, useContext, useEffect } from 'react';
+import {
+  ReactFlow,
+  Background,
+  Controls,
+  applyEdgeChanges,
+  applyNodeChanges,
+  addEdge,
+} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
 import {
@@ -36,13 +43,34 @@ const WorkFlowCanvas = () => {
   // Get the workflow state from context. This gives us all the nodes and edges to display.
   const context = useContext(WorkFlowContext);
   if (!context) return null; // If context isn't ready, don't render anything.
-  const { nodes, edges } = context;
+  const { nodes, edges, setNodes, setEdges } = context;
+
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+    [setNodes]
+  );
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+    [setEdges]
+  );
+
+  console.log(edges);
+
+  const onConnect = useCallback((connection) => setEdges((eds) => addEdge(connection, eds)), []);
 
   // ReactFlow is the engine that draws the workflow diagram.
   // We pass in our nodes, edges, and custom node types.
   // The fitView prop makes sure everything fits nicely in the viewport.
   return (
-    <ReactFlow nodes={nodes} fitView edges={edges} nodeTypes={nodeTypes}>
+    <ReactFlow
+      nodes={nodes}
+      fitView
+      edges={edges}
+      nodeTypes={nodeTypes}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
+      onConnect={onConnect}
+    >
       {/* Adds a subtle grid background to help users orient themselves. */}
       <Background />
       {/* Custom controls for zoom, fit view, and interactivity. Positioned at the bottom center. */}
