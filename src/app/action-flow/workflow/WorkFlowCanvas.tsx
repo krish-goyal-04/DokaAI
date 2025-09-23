@@ -74,17 +74,14 @@ const WorkFlowCanvas = () => {
       {/* Adds a subtle grid background to help users orient themselves. */}
       <Background />
       {/* Custom controls for zoom, fit view, and interactivity. Positioned at the bottom center. */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '20px', // Keep controls off the main canvas area
-          left: '50%', // Center horizontally
-          transform: 'translateX(-50%) rotate(270deg)', // Rotate for style
-          zIndex: 10,
-        }}
-      >
-        <Controls showZoom={true} showFitView={true} showInteractive={true} />
-      </div>
+      <Controls
+        showZoom={true}
+        showFitView={true}
+        showInteractive={true}
+        orientation="horizontal"
+        position="bottom-center"
+        className=""
+      />
     </ReactFlow>
   );
 };

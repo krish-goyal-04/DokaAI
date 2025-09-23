@@ -1,10 +1,13 @@
+import { AccountTreeOutlined } from '@mui/icons-material';
 import { FiChevronRight, FiSave, FiSend } from 'react-icons/fi';
 
 const WorkFlowHeader = ({ name }: { name: string }) => {
   return (
     <div className="w-full flex justify-between items-center bg-white px-5 py-4 text-lg">
       <div className="flex items-center gap-2">
-        <div className="bg-green-100 p-2 rounded"></div>
+        <div className="bg-green-100 p-2 rounded text-green-400">
+          <AccountTreeOutlined />
+        </div>
         <FiChevronRight className="text-green-500" />
         <span className="font-semibold text-gray-100 ">{name}</span>
       </div>
