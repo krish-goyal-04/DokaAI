@@ -10,35 +10,42 @@ const channels: string[] = ['Email', 'SMS', 'Push'];
 const IndividualChannels = ({ closeOverlay }: { closeOverlay: () => void }) => {
   const context = useContext(WorkFlowContext);
   if (!context) return null;
-  const { addNode, addEdge } = context;
+  const { addNode } = context;
 
-  const [channel, setChannel] = useState<string>('');
-  const [content, setContent] = useState<string>('');
+  const [channel, setChannel] = useState<string>(''); // stores selected channel (Email/SMS/Push)
+  const [content, setContent] = useState<string>(''); // stores typed content
 
-  const newNode = {
-    id: 'IndividualChannels',
-    position: { x: -220, y: 450 },
-    data: { label: 'Channel', channel, content },
-    type: 'individualChannels',
-  } as const;
+  const handleSave = () => {
+    // Each new node needs its own unique ID
+    // Date.now() ensures that every time we click "Save", a fresh ID is generated
+    const id = `individual-${Date.now()}`;
 
-  /*const newEdge = {
-    id: 'channelRouter_indivisualChannel',
-    source: 'ChannelRouter',
-    target: 'IndividualChannels',
-    sourceHandle: 'channelrouter-output',
-    targetHandle: 'individualchannels-input',
-    type: '',
-  };*/
+    // Create the new node object
+    const newNode = {
+      id,
+      position: { x: Math.random() * 300, y: Math.random() * 300 }, // place randomly for now so nodes don’t overlap
+      data: { label: channel || 'Channel', channel, content }, // pass along what user selected/typed
+      type: 'individualChannels', // tells React Flow which custom node component to use
+    };
+
+    // Push this node into global context → it will immediately show up on the canvas
+    addNode(newNode as any);
+
+    // Close the overlay after saving
+    closeOverlay();
+  };
 
   return (
-    <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
+    <div className="absolute z-50 flex items-stretch mt-5" style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
+        {/* Header with back button */}
         <div>
           <div className="flex gap-4 items-center mb-6">
             <ArrowBackIcon onClick={closeOverlay} className="cursor-pointer" />
             <h2 className="text-sm font-semibold flex text-black">Individual Channel</h2>
           </div>
+
+          {/* Form fields for channel + content */}
           <div className="flex flex-col gap-6">
             <section>
               <p className="text-gray-500 mb-2">Channel</p>
@@ -51,6 +58,7 @@ const IndividualChannels = ({ closeOverlay }: { closeOverlay: () => void }) => {
                 height={42}
               />
             </section>
+
             <section>
               <p className="text-gray-500 mb-2">Content</p>
               <TextArea
@@ -62,14 +70,11 @@ const IndividualChannels = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </section>
           </div>
         </div>
-        <Button
-          text="Save"
-          onClick={() => {
-            addNode(newNode as any);
-            //addEdge(newEdge);
-            closeOverlay();
-          }}
-        />
+
+        {/* Save button that adds the node */}
+        <Button text="Save" onClick={handleSave} />
+
+        {/* Smooth little slide-in animation */}
         <style jsx>{`
           @keyframes slide-in {
             from {

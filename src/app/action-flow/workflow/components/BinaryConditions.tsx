@@ -4,8 +4,8 @@ import { CustomSelect } from '@/cuteui/components/custom-select';
 import { Button } from '@/cuteui/components/button/button';
 import { WorkFlowContext } from '@/context/WorkFlowProvider';
 import { TextArea } from '@/cuteui/components/textarea';
-// BinaryConditions overlay lets the user define a single branching condition for the workflow.
-// This is used to split the workflow based on a property, operator, and value (e.g., user type, greater than, etc.).
+
+// Options for the dropdowns (just demo values for now)
 const conditionItems: string[] = ['Instagram', 'Twitter', 'Reddit'];
 const dataPropertyItems: string[] = ['Influencer', 'Casual Users'];
 const operators: string[] = [
@@ -17,18 +17,18 @@ const operators: string[] = [
 ];
 
 const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
-  // Access workflow context to add nodes and edges to the React Flow diagram.
+  // Grab workflow state/actions from context
   const context = useContext(WorkFlowContext);
   if (!context) return null;
-  const { addNode, addEdge } = context as any;
+  const { addNode } = context as any;
 
-  // State for each form field: condition name, operator, property, and value.
-  const [value, setValue] = useState<string>('');
-  const [operator, setOperator] = useState<string>('');
-  const [dataProp, setDataProp] = useState<string>('');
-  const [inputValue, setInputValue] = useState<string>('');
+  // Local state for the form fields
+  const [value, setValue] = useState<string>(''); // Which condition (Twitter, Reddit, etc.)
+  const [operator, setOperator] = useState<string>(''); // Operator (equals, >, <, etc.)
+  const [dataProp, setDataProp] = useState<string>(''); // Property being checked
+  const [inputValue, setInputValue] = useState<string>(''); // The value to compare against
 
-  // Helper array for rendering dropdowns for property and operator.
+  // Dropdowns for property and operator fields
   const displayItems = [
     {
       title: 'Data Property',
@@ -46,38 +46,33 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
     },
   ];
 
-  // Defining the new node to add to the workflow graph.
-  // This node represents the binary condition and stores the selected values.
+  // Define a new node to add when user saves this condition
   const newNode = {
-    id: 'BinaryConditions',
-    position: { x: 0, y: 200 },
-    data: { label: 'Condition', operator: operator, condition: dataProp, inputValue: inputValue },
+    id: `BinaryConditions-${Date.now()}`, // unique id using timestamp
+    position: { x: 0, y: 200 }, // default position, can be updated later
+    data: {
+      label: 'Condition',
+      operator: operator,
+      condition: dataProp,
+      inputValue: inputValue,
+    },
     type: 'binaryConditions',
   };
 
-  // Defining the edge connecting the Recipients node to the BinaryConditions node.
-  // This visually links the audience selection to the condition logic.
-  /*const newEdge = {
-    id: 'Recipient-BinaryConditions',
-    source: 'Recipient',
-    target: 'BinaryConditions',
-    sourceHandle: 'recipient-output',
-    targetHandle: 'binarycondition-input',
-    type: 'smoothstep',
-  };*/
-
   return (
-    // Modal overlay for binary condition configuration. Uses a slide-in animation for smooth UX.
-    <div className="absolute z-50 flex items-stretch mt-5  " style={{ top: '64px' }}>
+    // Overlay modal for adding a new condition
+    <div className="absolute z-50 flex items-stretch mt-5" style={{ top: '64px' }}>
       <div className="bg-white p-6 rounded-lg shadow-lg w-[500px] h-[calc(100vh-100px)] ml-2 flex flex-col justify-between animate-slide-in">
         <div>
-          {/* Header with back arrow and title. */}
+          {/* Header with back button + title */}
           <div className="flex gap-4 items-center mb-6">
             <ArrowBackIcon onClick={closeOverlay} className="cursor-pointer" />
             <h2 className="text-sm font-semibold flex text-black">Add condition details</h2>
           </div>
+
+          {/* Form fields */}
           <div className="flex flex-col gap-6">
-            {/* Dropdown for condition name. */}
+            {/* Dropdown for condition name (Instagram, Twitter, etc.) */}
             <section>
               <p className="text-gray-500 mb-2">Condition name</p>
               <CustomSelect
@@ -89,7 +84,8 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
                 height={42}
               />
             </section>
-            {/* Dropdowns for property and operator, plus value input. */}
+
+            {/* Dropdowns for property + operator, then value input */}
             <div className="flex flex-col gap-5 p-3">
               {displayItems.map((item, ind) => (
                 <section key={ind}>
@@ -104,7 +100,7 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
                   />
                 </section>
               ))}
-              {/* Text input for the condition value. */}
+              {/* Input for the actual comparison value */}
               <section>
                 <p className="text-gray-500">Value</p>
                 <TextArea
@@ -118,16 +114,17 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
             </div>
           </div>
         </div>
-        {/* Save button adds the node and edge, then closes the overlay. */}
+
+        {/* Save button creates the node and closes the overlay */}
         <Button
           text="Save"
           onClick={() => {
             addNode(newNode);
-            //addEdge(newEdge);
             closeOverlay();
           }}
         />
-        {/* Slide-in animation for the modal. */}
+
+        {/* Small slide-in animation for modal */}
         <style jsx>{`
           @keyframes slide-in {
             from {
@@ -148,5 +145,4 @@ const BinaryConditions = ({ closeOverlay }: { closeOverlay: () => void }) => {
   );
 };
 
-// This overlay is the user's way to add branching logic to the workflow.
 export default BinaryConditions;
